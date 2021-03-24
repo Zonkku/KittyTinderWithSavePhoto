@@ -11,6 +11,10 @@
 			<tr th:each = "kitty : ${kitties}" >
 				<td th:text="'Name: ' + ${kitty.name}" ></td>
 				<td th:text="'Age: ' + ${kitty.age}" ></td>
+				<td><a th:href="@{/addphoto/{id}(id=${kitty.id})}" >Add profile picture</a></td>
+
+				<td><a th:href="@{/edit/{id}(id=${kitty.id})}" >Edit</a></td>
+				<td><a th:href="@{/delete/{id}(id=${kitty.id})}">Delete</a></td>
 			</tr>
 		</tbody>
 	</table>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>KittyTinder</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+	<form th:object="${kitty}" th:action="@{../savephoto}" action="#" method="post">
+		
+		<input type="hidden" th:field="*{id}" class="form-control"/>
+
+		<!-- KUVAN NIMEN VOI TALLENTAA KITTY-OLIOON TÄSSÄ -->
+		<input type="text" th:field="*{photoFile}" />
+
+		<!-- HTML5 Input Form Elements -->
+			<p>Profile picture (max 1 Mb): </p>
+			<input id="fileupload" type="file" name="fileupload"  />
+			<button id="upload-button" onclick="uploadFile()"> Upload </button>
+
+		<!-- Ajax JavaScript File Upload to Spring Boot Logic -->
+		<script>
+			async function uploadFile() {
+		  		let formData = new FormData(); 
+				  formData.append("file", fileupload.files[0]);
+				  let response = await fetch('/upload', {
+				    method: "POST", 
+				    body: formData
+				}); 
+		
+				if (response.status == 200) {
+					
+			    	alert("File successfully uploaded.");
+			  	}
+			}
+		</script>
+			
+		
+	
+	</form>
+
+
+</body>
+</html>
