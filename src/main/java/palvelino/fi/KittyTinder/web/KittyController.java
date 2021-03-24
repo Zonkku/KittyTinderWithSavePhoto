@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.File;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
+
 import palvelino.fi.KittyTinder.domain.CategoryRepository;
 import palvelino.fi.KittyTinder.domain.Kitty;
 import palvelino.fi.KittyTinder.domain.KittyRepository;
@@ -47,6 +52,25 @@ public class KittyController {
 		repository.save(kitty);
 		return "redirect:kittyprofiles";
 	}
+	
+	  @GetMapping("/index")
+	  public String hello() {
+	    return "uploader";
+	  }
+
+	  @PostMapping("/upload") 
+	  public ResponseEntity<?> handleFileUpload( @RequestParam("file") MultipartFile file ) {
+
+	    String fileName = file.getOriginalFilename();
+	    try {
+	      file.transferTo( new File("C:\\upload\\" + fileName));
+	    } catch (Exception e) {
+	      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+	    } 
+	    return ResponseEntity.ok("File uploaded successfully.");
+	  }
+
+
 	
 	
 }
