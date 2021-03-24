@@ -62,12 +62,13 @@ public class KittyController {
 	  public ResponseEntity<?> handleFileUpload( @RequestParam("file") MultipartFile file ) {
 
 	    String fileName = file.getOriginalFilename();
+	    
 	    try {
 	      file.transferTo( new File("C:\\upload\\" + fileName));
 	    } catch (Exception e) {
 	      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 	    } 
-	    return ResponseEntity.ok("File uploaded successfully.");
+	   	return ResponseEntity.ok("");
 	  }
 
 

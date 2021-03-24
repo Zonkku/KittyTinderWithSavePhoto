@@ -15,7 +15,7 @@ public class Kitty {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String name, sex, city, intro, addInfo;
+	private String name, sex, city, intro, addInfo, photoFile;
 	private int age;
 	
 	@ManyToOne
@@ -23,17 +23,19 @@ public class Kitty {
 	private AgeCategory agecategory;
 	
 	public Kitty() {}
-	
+
 	public Kitty(String name, int age) {
 		this.name=name;
 		this.age=age;
 		}
 
-	public Kitty(String name, int age, String city) {
+	
+	public Kitty(String name, int age, String photoFile) {
 		this.name=name;
 		this.age=age;
-		this.city=city;
-	}
+		this.photoFile = photoFile;
+		}
+
 
 	public Kitty(String name, int age, String city,  String sex) {
 		this.name=name;
@@ -44,6 +46,14 @@ public class Kitty {
 	}
 	
 	
+	public String getPhotoFile() {
+		return photoFile;
+	}
+
+	public void setPhotoFile(String photoFile) {
+		this.photoFile = photoFile;
+	}
+
 	public Kitty(String name, String city, int age, String intro) {
 		this.name=name;
 		this.city=city;
@@ -135,11 +145,18 @@ public class Kitty {
 
 	@Override
 	public String toString() {
+		
 		if (this.agecategory != null)
 			return "Kitty [id=" + id + ", name=" + name + ", sex=" + sex + ", city=" + city + ", intro=" + intro
-				+ ", addInfo=" + addInfo + ", age=" + age + ", agecategory=" + this.getAgecategory() + "]";
-		else
+					+ ", addInfo=" + addInfo + ", photoFile=" + photoFile + ", age=" + age + ", agecategory=" + this.getAgecategory()
+					+ "]";
+		
+		else		
 			return "Kitty [id=" + id + ", name=" + name + ", sex=" + sex + ", city=" + city + ", intro=" + intro
-					+ ", addInfo=" + addInfo + ", age=" + age + "]";
+				+ ", addInfo=" + addInfo + ", photoFile=" + photoFile + ", age=" + age + "]";
 	}
+
+	
+	
+	
 }
